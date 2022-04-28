@@ -48,7 +48,7 @@ interface customerAccess{
 	CreditCard getCreditCard();
 	DebitCard getDebitCard(int cardNo);
 }
-class CustomerDB implements customerAccess{
+class CustomerData implements customerAccess{
 	private HashMap<Account,HashSet<DebitCard>> accounts =new HashMap<>();
 	private CreditCard creditCard;
 	void addNewAccount(Account account) {
