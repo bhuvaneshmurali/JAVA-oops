@@ -39,16 +39,18 @@ class Customer{
 	public String getName() {
 		return name;
 	}
-	
 }
 interface customerAccess{
 	void showAllAccountDetails();
 	Account getAccount(int accountNo);
 	void showAllDebitCardDetailsLinkedToAccount(Account account);
 	void BlockDebitCard(int cardNo);
+	CreditCard getCreditCard();
+	DebitCard getDebitCard(int cardNo);
 }
 class CustomerDB implements customerAccess{
 	private HashMap<Account,HashSet<DebitCard>> accounts =new HashMap<>();
+	private CreditCard creditCard;
 	void addNewAccount(Account account) {
 	}
 	void removeAccount(int accountNumber) {}
@@ -76,6 +78,17 @@ class CustomerDB implements customerAccess{
 	public void removeDebitCard(int cardNo,Account account) {}
 	public HashMap<Account,HashSet<DebitCard>> getAccounts() {
 		return accounts;
+	}
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
+	@Override
+	public DebitCard getDebitCard(int cardNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 class Account{
@@ -184,8 +197,8 @@ class DebitCard{
 	void deposit(int amount) {}
 }
 class CreditCard{
-	private int cardNo,withdrawalLimit,swipLimit,creditedAmount;
-	CreditCard(int cardNo,int withdrawalLimit,int swipLimit){}
+	private int cardNo,withdrawalLimit,swipLimit,creditedAmount,creditCardInterest;
+	CreditCard(int cardNo,int withdrawalLimit,int swipLimit,int creditCardInterest){}
 	public int getWithdrawalLimit() {
 		return withdrawalLimit;
 	}
@@ -199,6 +212,8 @@ class CreditCard{
 		return creditedAmount;
 	}
 	void withdrawal(int amount) {}
-	void autoClaim(Account account) {} 
-	
+	void autoClaim(Account account) {}
+	public int getCreditCardInterest() {
+		return creditCardInterest;
+	} 
 }
