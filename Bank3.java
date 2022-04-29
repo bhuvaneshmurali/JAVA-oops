@@ -1,8 +1,8 @@
 package starter;
 import java.util.*;
-public class Bank3 {
+public class Bank2 {
 	String name;
-	Bank3(String name){}
+	Bank2(String name){}
 	Set<Branch> branchs=new HashSet<>();
 	Set<Account> typesOfAccount=new HashSet<>();
 	void addNewBranch(Branch branch) {}
@@ -48,9 +48,8 @@ interface customerAccess{
 	CreditCard getCreditCard();
 	DebitCard getDebitCard(int cardNo);
 }
-
-class CustomerData implements customerAccess{
-	private HashMap<Integer,Account> accounts =new HashMap<>();
+class CustomerDB implements customerAccess{
+	private HashMap<Account,HashSet<DebitCard>> accounts =new HashMap<>();
 	private CreditCard creditCard;
 	void addNewAccount(Account account) {
 	}
@@ -63,8 +62,9 @@ class CustomerData implements customerAccess{
 	@Override
 	public Account getAccount(int accountNo) {
 		// TODO Auto-generated method stub
-		return accounts.get(accountNo);
+		return null;
 	}
+	void addNewDebitCard(Account account,DebitCard card) {}
 	@Override
 	public void showAllDebitCardDetailsLinkedToAccount(Account account) {
 		// TODO Auto-generated method stub
@@ -75,10 +75,15 @@ class CustomerData implements customerAccess{
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	public void removeDebitCard(int cardNo,Account account) {}
+	public HashMap<Account,HashSet<DebitCard>> getAccounts() {
+		return accounts;
+	}
 	public CreditCard getCreditCard() {
-		// TODO Auto-generated method stub
 		return creditCard;
+	}
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 	@Override
 	public DebitCard getDebitCard(int cardNo) {
@@ -88,7 +93,6 @@ class CustomerData implements customerAccess{
 }
 class Account{
 	private int minimumBalance,balance,accountNumber;
-	protected HashMap<Integer,DebitCard> debitCards = new HashMap<>();
 	private String accountType;
 	Account(int minBal,int accNo,String accountType){}
 	public int getMinimumBalance() {
@@ -146,9 +150,6 @@ class SavingAccount extends Account implements Interest{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	void addDebitCard(DebitCard debitCard) {
-	}
-	public void removeDebitCard(DebitCard debitCard) {}
 }
 class CurrentAccount extends Account{
 	static private int minBal;
@@ -167,14 +168,6 @@ class CurrentAccount extends Account{
 	}
 	public void setAccountType(String accountType) {
 		CurrentAccount.accountType = accountType;
-	}
-	void addDebitCard(DebitCard debitCard) {
-		// TODO Auto-generated method stub
-		
-	}
-	void removeDebitCard(DebitCard debitCard) {
-		// TODO Auto-generated method stub
-		
 	}
 }
 class DebitCard{
@@ -205,7 +198,6 @@ class DebitCard{
 }
 class CreditCard{
 	private int cardNo,withdrawalLimit,swipLimit,creditedAmount,creditCardInterest;
-	private boolean cardStatus=true;
 	CreditCard(int cardNo,int withdrawalLimit,int swipLimit,int creditCardInterest){}
 	public int getWithdrawalLimit() {
 		return withdrawalLimit;
@@ -224,10 +216,4 @@ class CreditCard{
 	public int getCreditCardInterest() {
 		return creditCardInterest;
 	} 
-	public boolean isCardStatus() {
-		return cardStatus;
-	}
-	public void setCardStatus(boolean cardStatus) {
-		this.cardStatus = cardStatus;
-	}
 }
