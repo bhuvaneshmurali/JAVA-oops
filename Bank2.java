@@ -48,9 +48,14 @@ interface customerAccess{
 	CreditCard getCreditCard();
 	DebitCard getDebitCard(int cardNo);
 }
+<<<<<<< HEAD
 
 class CustomerData implements customerAccess{
 	private HashMap<Integer,Account> accounts =new HashMap<>();
+=======
+class CustomerData implements customerAccess{
+	private HashMap<Account,HashSet<DebitCard>> accounts =new HashMap<>();
+>>>>>>> 936fc586665d58fe752bedd2e95a6dd2883ac13e
 	private CreditCard creditCard;
 	void addNewAccount(Account account) {
 	}
@@ -224,6 +229,7 @@ class CreditCard{
 	public int getCreditCardInterest() {
 		return creditCardInterest;
 	} 
+<<<<<<< HEAD
 	public boolean isCardStatus() {
 		return cardStatus;
 	}
@@ -231,3 +237,6 @@ class CreditCard{
 		this.cardStatus = cardStatus;
 	}
 }
+=======
+}
+>>>>>>> 936fc586665d58fe752bedd2e95a6dd2883ac13e
